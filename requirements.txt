@@ -1,6 +1,7 @@
 asgiref==3.11.1
 certifi==2026.4.22
 charset-normalizer==3.4.7
+dj-database-url==3.1.2
 dj-rest-auth==7.2.0
 Django==4.2.30
 django-allauth==65.16.1

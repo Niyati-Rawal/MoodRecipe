@@ -5,9 +5,10 @@ Reads secrets from .env via python-decouple.
 
 from pathlib import Path
 from decouple import config, Csv
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+import os
 # --- Security ---
 SECRET_KEY = config("DJANGO_SECRET_KEY", default="dev-secret-change-in-prod")
 DEBUG = config("DEBUG", default=True, cast=bool)
@@ -54,14 +55,9 @@ TEMPLATES = [
 
 # --- Database ---
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": config("DB_NAME", default="moodrecipe"),
-        "USER": config("DB_USER", default="postgres"),
-        "PASSWORD": config("DB_PASSWORD", default=""),
-        "HOST": config("DB_HOST", default="localhost"),
-        "PORT": config("DB_PORT", default="5432"),
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL')
+    )
 }
 
 # --- Auth ---
